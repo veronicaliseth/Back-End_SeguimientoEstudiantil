@@ -38,3 +38,10 @@ app.post('/credencialstudent',(req,res)=>{
 
     conn.query("insert into credencialestudiante(nombreAlumno, matricula, curp, carrera, tipoSangre, nss, nombreCompletoFamiliar, numeroTelefono)values ('"+nombreAlumno+"', '"+matricula+"','"+curp+"', '"+carrera+"','"+tipoSangre+"', '"+nss+"', '"+nombreCompletoFamiliar+"', '"+numeroTelefono+"')")
 })
+
+app.post('/usuarios',(req,res)=>{
+    const username = req.body.username1;
+    const password = req.body.passwor1;
+
+    conn.query("insert into usuarios(username, password) values('"+username+"','"+password+"')")
+})
