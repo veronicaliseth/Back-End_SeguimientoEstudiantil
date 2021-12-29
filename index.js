@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 var app = express()
 var cors = require('cors')
 const { query } = require("./configmysql")
+const req = require("express/lib/request")
 
 app.use(express.json());
 const corsOptions ={
@@ -44,4 +45,15 @@ app.post('/usuarios',(req,res)=>{
     const password = req.body.passwor1;
 
     conn.query("insert into usuarios(username, password) values('"+username+"','"+password+"')")
+})
+
+app.post('/aspirantes',(req,res)=>{
+
+
+
+})
+
+app.post('/interesados',(req,res)=>{
+
+
 })
