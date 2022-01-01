@@ -6,6 +6,7 @@ var app = express();
 var cors = require("cors");
 const { query } = require("./configmysql")
 const req = require("express/lib/request");
+const res = require("express/lib/response");
 
 app.use(express.json());
 const corsOptions = {
@@ -72,19 +73,20 @@ app.post("/usuarios", (req, res) => {
   const password = req.body.pass;
   let respuesta = "";
 
-  respuesta = conn.query(
+    conn.query(
     "select * from usuarios where username = '" +
       username +
       "' and password = '" +
       password +
       "'",
-    function (err, rows, fields) {}
+    function (err, rows, fields) {
+        if (rows.length > 0) {
+            res.send(true)
+        }else{
+            res.send(false)
+        }
+    }
   );
-
-  res.json({
-    resp: respuesta,
-    mensaje: "Registro exitoso",
-  });
 });
 
 app.post("/aspirantes", (req, res) => {
@@ -190,6 +192,18 @@ app.post("/interesados", (req, res) => {
 
 app.get("/controlDatos", (req,res) => {
     conn.query("select * from credencialestudiante", (err, rows, fields)=>{
+        res.send(rows)
+    })
+});
+
+app.get("/controldatosaspirantes", (req,res) => {
+    conn.query("select nombre as nombreAlumno,fecha from datospersonales", (err, rows, fields)=>{
+        res.send(rows)
+    })
+});
+
+app.get("/controldatosinteresados", (req,res) =>{
+    conn.query("select nombre as nombreAlumno,fecha from datospersonalesinteresado", (err, rows, fields)=>{
         res.send(rows)
     })
 });
