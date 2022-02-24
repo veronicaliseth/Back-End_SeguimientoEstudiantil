@@ -4,7 +4,7 @@ const config = {
     host : 'localhost',
     user : 'root',
     database: 'bdusuario',
-    password: 'carolinabezares06',
+    password: 'root',
     insecureAuth: true,
 };
 
